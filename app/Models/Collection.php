@@ -9,7 +9,7 @@ use jcobhams\NewsApi\NewsApiException;
 
 class Collection
 {
-    public function getCollection(string $search, int $size)
+    public function getCollection(string $search, int $size): array
     {
         $apiKey = $_ENV['SECRET_KEY'];
 
