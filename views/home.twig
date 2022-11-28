@@ -1,7 +1,4 @@
-<?php
-?>
-
-<<!doctype html>
+<!doctype html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -11,13 +8,17 @@
     <title>Home</title>
 </head>
 <body>
-    <h1>News</h1>
+<h1>News</h1>
     <form action="find/">
         <label for="news">Find city:</label>
         <br>
         <input type="text" id="news" name="news">
         <input type="submit" value="Submit" >
     </form>
-    <p>Article collection display here</p>
+    {% for article in article %}
+        <h1>{{ articleTitle }}</h1>
+        <h2>{{ articleAthor }}</h2>
+        <p>{{ articleDescription }}</p>
+    {% endfor %}
 </body>
 </html>

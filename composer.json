@@ -9,6 +9,8 @@
     },
     "require": {
         "vlucas/phpdotenv": "^5.5",
-        "jcobhams/newsapi": "^1.0"
+        "jcobhams/newsapi": "^1.0",
+        "twig/twig": "^3.0",
+        "nikic/fast-route": "^1.3"
     }
 }

@@ -1,15 +1,14 @@
 <?php
 
-namespace App\Models;
+ namespace App\Controllers;
 
-require_once 'vendor/autoload.php';
+ use App\Models\Article;
+ use jcobhams\NewsApi\NewsApi;
+ use Twig\Template;
 
-use jcobhams\NewsApi\NewsApi;
-use jcobhams\NewsApi\NewsApiException;
-
-class Collection
+ class CollectionController
 {
-    public function getCollection(string $search, int $size): array
+    public function getCollection(?string $search = "NHL", ?int $size = 10): Template
     {
         $apiKey = $_ENV['SECRET_KEY'];
 
@@ -26,10 +25,8 @@ class Collection
             $page_size = $size,
             $page = null);
 
-        $articleCollection = [];
-
         foreach ($articlesResponse->articles as $article) {
-            $articleCollection[] = new Article(
+            $articles = new Article(
                 $article->author,
                 $article->title,
                 $article->description,
@@ -38,6 +35,13 @@ class Collection
             );
         }
 
-        return $articleCollection;
+        return new Template()
+        {
+            $twig->render('../../views/home.twig', [
+            "articleTitle" => $articles->getTitle(),
+            "articleAthor" => $articles->getAuthor(),
+            "articleDescription" => $articles->getDescription()
+        ]);
     }
-}
+    }
+ }
